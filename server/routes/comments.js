@@ -7,6 +7,7 @@ let router = express.Router()
 
 // Search API to filter through comments
 const stringFields = ['name', 'email', 'body']
+
 router.get('/comments', async (req, res) => {
 	const { query } = req
   const { data: comments } = await axios.get(getComments)
@@ -41,8 +42,8 @@ router.get('/comments', async (req, res) => {
 	}, [])
 
 	res.json(responseHandler({
-		comments: filtered,
-		total: filtered.length
+		comments: (filtered.length > 0) ? filtered : comments,
+		total: (filtered.length > 0) ? filtered.length : comments.length,
 	},
 	{
 		message: 'Returned filtered comments'
