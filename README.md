@@ -10,7 +10,7 @@
 
 
 ## Postman
-- [View collection here](https://www.getpostman.com/collections/1aa715df49cb797782c4
+- [View collection here](https://www.getpostman.com/collections/1aa715df49cb797782c4)
 
 
 # Assignment
