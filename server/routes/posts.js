@@ -4,6 +4,7 @@ const {
   getComments,
   getAllPosts,
 } = require('../services')
+const { responseHandler } = require('../utils')
 
 let router = express.Router()
 
@@ -38,17 +39,13 @@ router.get('/popular-posts', async (req, res) => {
 
 	const sorted = postWithCount.sort((a, b) => a.total_number_of_comments < b.total_number_of_comments ? 1 : -1)
 
-	res.json({
-		meta: {
-			code: 200,
-			error: null,
-			message: 'Fetched popular posts'
-		},
-		data: {
-			popular_posts: sorted,
-			total: sorted.length,
-		}
-	})
+	res.json(responseHandler({
+		popular_posts: sorted,
+		total: sorted.length,
+	},
+	{
+		message: 'Fetched popular posts'
+	}))
 })
 
 module.exports.router = router

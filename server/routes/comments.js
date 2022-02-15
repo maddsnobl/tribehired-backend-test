@@ -1,6 +1,7 @@
 const express = require('express')
 const axios = require('axios')
 const {  getComments } = require('../services')
+const { responseHandler } = require('../utils')
 
 let router = express.Router()
 
@@ -39,17 +40,13 @@ router.get('/comments', async (req, res) => {
 		return arr
 	}, [])
 
-	res.json({
-		meta: {
-			code: 200,
-			error: null,
-			message: 'Returned filtered comments.'
-		},
-		data: {
-			comments: filtered,
-			total: filtered.length,
-		}
-	})
+	res.json(responseHandler({
+		comments: filtered,
+		total: filtered.length
+	},
+	{
+		message: 'Returned filtered comments'
+	}))
 })
 
 module.exports.router = router
